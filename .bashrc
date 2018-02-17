@@ -6,8 +6,8 @@
 export PATH=$PATH:~/bin
 
 # history
-export HISTFILESIZE='1000'
-export HISTSIZE='-1'
+export HISTFILESIZE=1000
+export HISTSIZE=-1
 export HISTCONTROL='erasedups'
 export HISTIGNORE='c:r:x:ls:la:lal'
 shopt -s cmdhist
