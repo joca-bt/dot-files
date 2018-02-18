@@ -19,5 +19,5 @@ alias ctar='tar -vcaf'
 alias xtar='tar -vxf'
 
 __ps_format='s,uname,pid,c,nlwp,rss,vsz,tname,start_time,time,cmd'
-alias pst="ps -t $(tty) -o $__ps_format"
-alias psu="ps -u $(whoami) -o $__ps_format"
+alias pst="ps -t $(tty) -o ${__ps_format}"
+alias psu="ps -u $(whoami) -o ${__ps_format}"
