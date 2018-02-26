@@ -1,4 +1,4 @@
-! menu -> hyper
+! remap menu to hyper
 keycode 135 = Hyper_R
 remove Mod4 = Hyper_L
 add Mod3 = Hyper_R
