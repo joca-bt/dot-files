@@ -5,6 +5,9 @@
 
 export PATH=$PATH:~/bin
 
+# ------------------------------------------------------------------------------
+# bash and readline ------------------------------------------------------------
+
 # history
 export HISTFILESIZE=1000
 export HISTSIZE=-1
@@ -25,5 +28,36 @@ shopt -s extglob
 shopt -s globstar
 shopt -s nocaseglob
 
-. ~/bin/bash/functions.sh
-. ~/bin/bash/aliases.sh
+# ------------------------------------------------------------------------------
+# functions --------------------------------------------------------------------
+
+function __get_current_branch {
+    echo "$(git symbolic-ref --short HEAD)"
+}
+
+# ------------------------------------------------------------------------------
+# aliases ----------------------------------------------------------------------
+
+alias e='emacsclient -n'
+alias vi='vim'
+
+alias c='clear'
+alias r='reset'
+alias x='exit'
+
+alias ls='ls -qF --color=auto'
+alias la='ls -lhA'
+alias lal='la | less'
+
+alias takep='chmod -R g-rwx,o-rwx'
+alias givep='chmod -R g+r,o+r'
+
+__ps_format='s,uname,pid,c,nlwp,rss,vsz,tname,start_time,time,cmd'
+alias pst='ps -t $(tty) -o ${__ps_format}'
+alias psu='ps -u $(whoami) -o ${__ps_format}'
+
+alias ctar='tar -vcaf'
+alias xtar='tar -vxf'
+
+alias pull='git pull --rebase=preserve origin $(__get_current_branch)'
+alias push='git push origin $(__get_current_branch)'
