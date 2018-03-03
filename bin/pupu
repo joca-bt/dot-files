@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 branch="$(git symbolic-ref --short HEAD)"
 retry=1
 count=0
