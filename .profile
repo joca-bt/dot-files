@@ -9,4 +9,4 @@ if [[ "${MSYSTEM}" ]]; then
     export PATH="${__path//;/:}:${PATH}"
 fi
 
-. ~/.bashrc
+[[ -f ~/.bashrc ]] && . ~/.bashrc
