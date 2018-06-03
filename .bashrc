@@ -3,7 +3,15 @@
 
 [[ "$-" != *'i'* ]] && return
 
+export EDITOR='vim'
+export VISUAL='emacsclient -n'
+
 export PATH="${PATH}:~/bin"
+
+if [[ "${MSYSTEM}" ]]; then
+    __path="${__emacs}:${__meld}:${__git}"
+    export PATH="${__path//;/:}:${PATH}"
+fi
 
 # ------------------------------------------------------------------------------
 # bash and readline ------------------------------------------------------------
@@ -27,11 +35,6 @@ shopt -s dirspell
 shopt -s extglob
 shopt -s globstar
 shopt -s nocaseglob
-
-# ------------------------------------------------------------------------------
-# others -----------------------------------------------------------------------
-
-[[ -f ~/.dircolors ]] && eval "$(dircolors ~/.dircolors)"
 
 # ------------------------------------------------------------------------------
 # functions --------------------------------------------------------------------
@@ -58,11 +61,11 @@ alias takep='chmod -R g-rwx,o-rwx'
 alias givep='chmod -R g+r,o+r'
 
 __ps_format='s,uname,pid,c,nlwp,rss,vsz,tname,start_time,time,cmd'
-alias pst='ps -t $(tty) -o ${__ps_format}'
-alias psu='ps -u $(whoami) -o ${__ps_format}'
+alias pst='ps -t "$(tty)" -o "${__ps_format}"'
+alias psu='ps -u "$(whoami)" -o "${__ps_format}"'
 
 alias ctar='tar -vcaf'
 alias xtar='tar -vxf'
 
-alias pull='git pull --rebase=preserve origin $(__get_current_branch)'
-alias push='git push origin $(__get_current_branch)'
+alias pull='git pull --rebase=preserve origin "$(__get_current_branch)"'
+alias push='git push origin "$(__get_current_branch)"'
