@@ -1,21 +1,19 @@
 #!/usr/bin/env bash
 
-#set -euo pipefail
-
 branch="$(git symbolic-ref --short HEAD)"
 retry=1
 count=0
 
 if ! git diff-index --quiet HEAD; then
-    echo "Error: you have unstaged changes."
+    echo "ERROR: You have unstaged changes."
     exit 1
 fi
 
-while [[ "${retry}" -ne 0 ]]; do
+while (( retry != 0 )); do
     git pull --rebase=preserve origin "${branch}"
     git push origin "${branch}"
     retry="$?"
-    ((count++))
+    (( count++ ))
     echo
 done
 
