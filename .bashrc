@@ -40,7 +40,7 @@ shopt -s nocaseglob
 # functions --------------------------------------------------------------------
 
 function __get_current_branch {
-    echo "$(git symbolic-ref --short HEAD)"
+    echo -n "$(git symbolic-ref --short HEAD)"
 }
 
 # ------------------------------------------------------------------------------
@@ -64,8 +64,8 @@ __ps_format='s,uname,pid,c,nlwp,rss,vsz,tname,start_time,time,cmd'
 alias pst='ps -t "$(tty)" -o "${__ps_format}"'
 alias psu='ps -u "$(whoami)" -o "${__ps_format}"'
 
-alias ctar='tar -vcaf'
-alias xtar='tar -vxf'
+alias ctar='tar -caf'
+alias xtar='tar -xf'
 
 alias pull='git pull --rebase=preserve origin "$(__get_current_branch)"'
 alias push='git push origin "$(__get_current_branch)"'
