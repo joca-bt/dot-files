@@ -1,0 +1,48 @@
+# based on https://github.com/nojhan/liquidprompt/
+
+function __set_prompt {
+    local error="$?"
+    local red="$(tput setaf 1)"
+    local bold="$(tput bold)"
+    local reset="$(tput sgr0)"
+
+    PS1="$(__jobs)\A \h $(__path) ${red}$(__error ${error})${reset}${bold}\$${reset} "
+}
+
+function __error {
+    local prompt=''
+    local error="$1"
+
+    if (( error != 0 )); then
+        prompt="${error} "
+    fi
+
+    echo -n "${prompt}"
+}
+
+function __jobs {
+    local prompt=''
+    local jobs="$(jobs | wc -l)"
+
+    if (( jobs != 0 )); then
+        prompt="${jobs} "
+    fi
+
+    echo -n "${prompt}"
+}
+
+function __path {
+    local prompt="${PWD/#${HOME}/\~}"
+    local dirs="${prompt//[^\/]}"
+    dirs="${#dirs}"
+
+    while (( dirs > 1 )); do
+        prompt="${prompt#*/}"
+        (( dirs-- ))
+    done
+
+    echo -n "${prompt}"
+}
+
+shopt -u promptvars
+PROMPT_COMMAND=__set_prompt
