@@ -6,7 +6,8 @@ function __set_prompt {
     local bold="\[$(tput bold)\]"
     local reset="\[$(tput sgr0)\]"
 
-    PS1="$(__jobs)\A \h $(__path) ${red}$(__error ${error})${reset}${bold}\$${reset} "
+    PS1="$(__jobs)\A \h $(__path) ${red}$(__error "${error}")${reset}${bold}\$${reset} "
+    echo -n "$(printf '\e]0;%s %s\a' "${HOSTNAME%%.*}" "${PWD/#$HOME/\~}")"
 }
 
 function __error {
