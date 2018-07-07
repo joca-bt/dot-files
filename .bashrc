@@ -36,6 +36,9 @@ shopt -s extglob
 shopt -s globstar
 shopt -s nocaseglob
 
+# window size
+shopt -s checkwinsize
+
 # prompt
 source .prompt
 

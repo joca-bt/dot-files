@@ -2,9 +2,9 @@
 
 function __set_prompt {
     local error="$?"
-    local red="$(tput setaf 1)"
-    local bold="$(tput bold)"
-    local reset="$(tput sgr0)"
+    local red="\[$(tput setaf 1)\]"
+    local bold="\[$(tput bold)\]"
+    local reset="\[$(tput sgr0)\]"
 
     PS1="$(__jobs)\A \h $(__path) ${red}$(__error ${error})${reset}${bold}\$${reset} "
 }
