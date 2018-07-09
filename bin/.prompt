@@ -1,13 +1,14 @@
 # based on https://github.com/nojhan/liquidprompt/
 
+RED="\[$(tput setaf 1)\]"
+BOLD="\[$(tput bold)\]"
+RESET="\[$(tput sgr0)\]"
+
 function __set_prompt {
     local error="$?"
-    local red="\[$(tput setaf 1)\]"
-    local bold="\[$(tput bold)\]"
-    local reset="\[$(tput sgr0)\]"
 
-    PS1="$(__jobs)\A \h $(__path) ${red}$(__error "${error}")${reset}${bold}\$${reset} "
-    echo -n "$(printf '\e]0;%s %s\a' "${HOSTNAME%%.*}" "${PWD/#$HOME/\~}")"
+    PS1="$(__jobs)\A \h \W ${RED}$(__error "${error}")${RESET}${BOLD}\$${RESET} "
+    echo -n "$(printf '\e]0;%s %s\a' "${HOSTNAME}" "${PWD/#$HOME/\~}")"
 }
 
 function __error {
@@ -28,19 +29,6 @@ function __jobs {
     if (( jobs != 0 )); then
         prompt="${jobs} "
     fi
-
-    echo -n "${prompt}"
-}
-
-function __path {
-    local prompt="${PWD/#${HOME}/\~}"
-    local dirs="${prompt//[^\/]}"
-    dirs="${#dirs}"
-
-    while (( dirs > 1 )); do
-        prompt="${prompt#*/}"
-        (( dirs-- ))
-    done
 
     echo -n "${prompt}"
 }
