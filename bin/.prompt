@@ -1,19 +1,19 @@
-# based on https://github.com/nojhan/liquidprompt/
+# Based on https://github.com/nojhan/liquidprompt/.
 
 RED="\[$(tput setaf 1)\]"
 BOLD="\[$(tput bold)\]"
 RESET="\[$(tput sgr0)\]"
 
-function __set_prompt {
+prompt::prompt() {
     local error="$?"
 
-    PS1="$(__jobs)\A \h \W ${RED}$(__error "${error}")${RESET}${BOLD}\$${RESET} "
+    PS1="$(prompt::jobs)\A \h \W ${RED}$(prompt::error "${error}")${RESET}${BOLD}\$${RESET} "
     echo -n "$(printf '\e]0;%s %s\a' "${HOSTNAME}" "${PWD/#$HOME/\~}")"
 }
 
-function __error {
-    local prompt=''
+prompt::error() {
     local error="$1"
+    local prompt=''
 
     if (( error != 0 )); then
         prompt="${error} "
@@ -22,9 +22,9 @@ function __error {
     echo -n "${prompt}"
 }
 
-function __jobs {
-    local prompt=''
+prompt::jobs() {
     local jobs="$(jobs | wc -l)"
+    local prompt=''
 
     if (( jobs != 0 )); then
         prompt="${jobs} "
@@ -34,4 +34,4 @@ function __jobs {
 }
 
 shopt -u promptvars
-PROMPT_COMMAND=__set_prompt
+PROMPT_COMMAND=prompt::prompt
