@@ -41,12 +41,14 @@ alias x='exit'
 alias ls='ls -qF --color=auto'
 alias la='ls -lhA'
 
+alias grep='grep --color=auto'
+
 PS_FORMAT='s,pid,tname,start,cmd'
 alias pst='ps -o "${PS_FORMAT}"'
-alias psu='ps -u "${USER}" -o "${PS_FORMAT}"'
+alias psu='ps -U "${USER}" -o "${PS_FORMAT}"'
 
 alias ctar='tar -caf'
 alias xtar='tar -xf'
 
-alias pull='git pull --rebase=merges origin "$(git symbolic-ref --short HEAD)"'
-alias push='git push origin "$(git symbolic-ref --short HEAD)"'
+alias pull='git pull --rebase=merges origin "$(git branch --show-current)"'
+alias push='git push origin "$(git branch --show-current)"'
