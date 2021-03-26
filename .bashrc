@@ -3,9 +3,7 @@
 
 [[ "$-" != *'i'* ]] && return
 
-[[ -f /etc/bashrc ]] && . /etc/bashrc
-
-export PATH="${PATH}:~/bin"
+export PATH="${PATH}:${HOME}/bin:${HOME}/go/bin:${HOME}/.local/bin"
 
 export EDITOR='vim'
 export VISUAL='emacsclient -n'
