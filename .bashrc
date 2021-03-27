@@ -8,25 +8,31 @@ export PATH="${PATH}:${HOME}/bin:${HOME}/go/bin:${HOME}/.local/bin"
 export EDITOR='vim'
 export VISUAL='emacsclient -n'
 
+bind 'set colored-stats on'
 bind 'set completion-ignore-case on'
+bind 'set completion-map-case on'
+bind 'set mark-directories on'
+bind 'set mark-symlinked-directories on'
 bind 'set show-all-if-unmodified on'
 bind 'set skip-completed-text on'
-shopt -s cdspell
-shopt -s direxpand
-shopt -s dirspell
-shopt -s extglob
-shopt -s globstar
-shopt -s nocaseglob
 
 export HISTCONTROL='erasedups'
 export HISTFILESIZE=10000
 export HISTIGNORE='c:r:x:ls:la'
-export HISTSIZE=-1
+export HISTSIZE=
+shopt -s cdspell
+shopt -s checkjobs
+shopt -s checkwinsize
 shopt -s cmdhist
+shopt -s direxpand
+shopt -s dirspell
+shopt -s extglob
+shopt -s globstar
 shopt -s histappend
 shopt -s lithist
+shopt -s nocaseglob
 
-. bin/.prompt
+source "${HOME}/bin/.prompt"
 
 # ------------------------------------------------------------------------------
 # aliases ----------------------------------------------------------------------

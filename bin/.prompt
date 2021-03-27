@@ -7,13 +7,14 @@ RESET="\[$(tput sgr0)\]"
 prompt::prompt() {
     local error="$?"
 
-    PS1="$(prompt::jobs)\A \h \W ${RED}$(prompt::error "${error}")${RESET}${BOLD}\$${RESET} "
+    PS1="\n$(prompt::jobs)\A \h \W ${RED}$(prompt::error "${error}")${RESET}${BOLD}❯${RESET} "
+
     echo -n "$(printf '\e]0;%s %s\a' "${HOSTNAME}" "${PWD/#$HOME/\~}")"
 }
 
 prompt::error() {
     local error="$1"
-    local prompt=''
+    local prompt
 
     if (( error != 0 )); then
         prompt="${error} "
@@ -24,7 +25,7 @@ prompt::error() {
 
 prompt::jobs() {
     local jobs="$(jobs | wc -l)"
-    local prompt=''
+    local prompt
 
     if (( jobs != 0 )); then
         prompt="${jobs} "
