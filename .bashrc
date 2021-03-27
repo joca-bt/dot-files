@@ -8,6 +8,9 @@ export PATH="${PATH}:${HOME}/bin:${HOME}/go/bin:${HOME}/.local/bin"
 export EDITOR='vim'
 export VISUAL='emacsclient -n'
 
+export LESSHISTFILE='-'
+[[ -x "$(command -v lesspipe)" ]] && eval "$(lesspipe)"
+
 bind 'set colored-stats on'
 bind 'set completion-ignore-case on'
 bind 'set completion-map-case on'
@@ -38,7 +41,6 @@ source "${HOME}/bin/.prompt"
 # aliases ----------------------------------------------------------------------
 
 alias e='emacsclient -n'
-alias vi='vim'
 
 alias c='clear'
 alias r='reset'
