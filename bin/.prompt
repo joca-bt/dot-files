@@ -1,5 +1,6 @@
 # Based on https://github.com/nojhan/liquidprompt/.
 
+CYAN="\[$(tput setaf 6)\]"
 RED="\[$(tput setaf 1)\]"
 BOLD="\[$(tput bold)\]"
 RESET="\[$(tput sgr0)\]"
@@ -7,9 +8,19 @@ RESET="\[$(tput sgr0)\]"
 prompt::prompt() {
     local error="$?"
 
-    PS1="\n$(prompt::jobs)\A \h \W ${RED}$(prompt::error "${error}")${RESET}${BOLD}❯${RESET} "
+    PS1="\n$(prompt::jobs)\A ${CYAN}$(prompt::environment)${RESET}\W ${RED}$(prompt::error "${error}")${RESET}${BOLD}❯${RESET} "
 
     echo -n "$(printf '\e]0;%s %s\a' "${HOSTNAME}" "${PWD/#$HOME/\~}")"
+}
+
+prompt::environment() {
+    local prompt
+
+    if [[ -v VIRTUAL_ENV ]]; then
+        prompt="$(basename "${VIRTUAL_ENV}") "
+    fi
+
+    echo -n "${prompt}"
 }
 
 prompt::error() {
